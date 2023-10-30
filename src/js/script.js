@@ -185,7 +185,9 @@ const select = {
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
 
-      thisProduct.amountWidgetElem.addEventListener("updated", thisProduct.processOrder());
+      thisProduct.amountWidgetElem.addEventListener("updated", function() {
+        thisProduct.processOrder()
+      });
     }
   }
   
@@ -217,21 +219,22 @@ const select = {
     }
     setValue(value){
       const thisWidget = this;
-
       const newValue = parseInt(value);
 
       /* TODO: Add validation */
 
       if(thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
         thisWidget.value = newValue;
+        thisWidget.announce();
       }
       thisWidget.input.value = thisWidget.value;
-      thisWidget.announce();
     }
     initActions(){
       const thisWidget = this;
 
-      thisWidget.input.addEventListener("change", thisWidget.setValue(thisWidget.input.value));
+      thisWidget.input.addEventListener("change", function(){
+        thisWidget.setValue(thisWidget.input.value)
+      });
 
       thisWidget.linkDecrease.addEventListener("click", function(event){
         event.preventDefault();
