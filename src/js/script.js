@@ -365,13 +365,52 @@
 
       /* create element using utils.createElemntFromHTML */
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
-
-      console.log(generatedDOM);
  
       /* add element to menu */
       thisCart.dom.productList.appendChild(generatedDOM);
+
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
+      console.log('thisCart.products:', thisCart.products)
     }
- 
+  }
+
+  class CartProduct{
+    constructor(menuProduct, element) {
+      const thisCartProduct = this;
+
+      thisCartProduct.id = menuProduct.id;
+      thisCartProduct.amount = menuProduct.amount;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.price = menuProduct.price;
+      thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.params = menuProduct.params
+
+      thisCartProduct.getElements(element);
+      thisCartProduct.initAmountWidget();
+      console.log(thisCartProduct);
+    }
+    getElements(element){
+      const thisCartProduct = this;
+
+      thisCartProduct.dom = {};
+      thisCartProduct.dom.wrapper = element;
+      thisCartProduct.dom.amountWidget = element.querySelector(select.cartProduct.amountWidget);
+      thisCartProduct.dom.price = element.querySelector(select.cartProduct.price);
+      thisCartProduct.dom.edit = element.querySelector(select.cartProduct.edit);
+      thisCartProduct.dom.remove = element.querySelector(select.cartProduct.remove);
+    }
+    initAmountWidget(){
+      const thisCartProduct = this;
+
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+      console.log(thisCartProduct.amountWidget)
+
+      thisCartProduct.dom.amountWidget.addEventListener("updated", function() {
+        thisCartProduct.amount =thisCartProduct.amountWidget;
+        thisCartProduct.price = parseInt(thisCartProduct.priceSingle * thisCartProduct.amount);
+        console.log(thisCartProduct)
+      });
+    }
   }
   
 
