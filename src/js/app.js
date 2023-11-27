@@ -2,6 +2,7 @@
   import Product from './components/Product.js';
   import Cart from './components/Cart.js';
   import Booking from './components/booking.js';
+  import Home from './components/Home.js'
 
   const app = {
     initPages: function(){
@@ -14,6 +15,7 @@
       const idFromHash = window.location.hash.replace('#/', '');
 
       let pageMatchingHash = thisApp.pages[0].id;
+      console.log(thisApp.pages[0].id)
 
       for(let page of thisApp.pages){
         if(page.id == idFromHash) {
@@ -37,6 +39,7 @@
           window.location.hash = '#/' + id;
         })
       }
+
     },
 
     activatePage: function(pageId){
@@ -63,6 +66,41 @@
       }
     },
 
+    initHome: function(){
+      const thisApp = this;
+
+      const homeContainer = document.querySelector(select.containerOf.homePage);
+      new Home(homeContainer);
+
+        const order = document.querySelector('.box.order');
+        const book = document.querySelector('.box.book')
+
+        order.addEventListener('click', function(event){
+        const clickedElement = this;
+        event.preventDefault();
+  
+        console.log(clickedElement);
+
+        const id = clickedElement.getAttribute('href').replace('#', '');
+
+        thisApp.activatePage(id)
+        /* change URL hash */
+        window.location.hash = '#/' + id;
+      });
+      book.addEventListener('click', function(event){
+        const clickedElement = this;
+        event.preventDefault();
+  
+        console.log(clickedElement);
+
+        const id = clickedElement.getAttribute('href').replace('#', '');
+
+        thisApp.activatePage(id)
+        /* change URL hash */
+        window.location.hash = '#/' + id;
+      });
+    },
+
     initBooking: function(){
       const thisApp = this;
 
@@ -82,14 +120,12 @@
           return rawResponse.json();
         })
         .then(function(parsedResponse){
-          console.log('parsedResponse', parsedResponse);
 
           /* save parsedResponse as thisApp.data.products */
           thisApp.data.products = parsedResponse;
           /* execute initMenu method */
           thisApp.initMenu();
         });
-      console.log('thisApp.data', JSON.stringify(thisApp.data));
     },
     initCart: function(){
       const thisApp = this;
@@ -110,6 +146,7 @@
       thisApp.initData();
       thisApp.initCart();
       thisApp.initBooking();
+      thisApp.initHome();
     },
 
   };

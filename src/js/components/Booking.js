@@ -62,9 +62,6 @@ class Booking {
         ]);
       })
       .then(function([bookings, eventsCurrrent, eventsRepeat]){
-        console.log(bookings);
-        console.log(eventsCurrrent);
-        console.log(eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrrent, eventsRepeat);
       });
   }
@@ -118,7 +115,7 @@ class Booking {
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
       }
-      console.log(thisBooking.booked[thisBooking.date][thisBooking.hour])
+      (thisBooking.booked[thisBooking.date][thisBooking.hour])
       if(
         !allAvailabe
         &&
@@ -174,7 +171,7 @@ class Booking {
     thisBooking.dom.waterCheckbox = document.querySelector("[value='water']");
     thisBooking.dom.breadCheckbox = document.querySelector("[value='bread']");
     thisBooking.dom.bookBTN = document.querySelector('.booking-form');
-    console.log(thisBooking.dom.bookBTN)
+    (thisBooking.dom.bookBTN)
 
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
     thisBooking.dom.allTables = thisBooking.dom.wrapper.querySelector(select.booking.tableWrapper);
@@ -277,7 +274,7 @@ class Booking {
         return response.json();
       })
       .then(function(parsedResponse){
-        console.log('parsedResponse: ', parsedResponse);
+        ('parsedResponse: ', parsedResponse);
       })
       .then(function(){
         thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
