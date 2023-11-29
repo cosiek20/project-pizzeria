@@ -93,7 +93,16 @@
   }
 
   .gallery{
+    a{
+      color: $color-main;
+    }
     margin-top: 130px;
+    .box:hover {
+      div{
+        display: block;
+        transition: 2s;
+      }
+    }
     .wrapper{
       display: flex;
       flex-wrap: wrap;
@@ -119,12 +128,6 @@
       .box:hover::before{
         opacity: 0.5;
         transition: 2s;
-      }
-      .box:hover {
-        div{
-          display: block;
-          transition: 2s;
-        }
       }
       .one {
         background-image: url(../../images/homepage/pizza-4.jpg);
@@ -175,9 +178,6 @@
         cursor: pointer;
         transition: 1s;
       }
-    }
-    a{
-      color: $color-main;
     }
   }
 }

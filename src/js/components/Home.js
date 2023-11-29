@@ -23,6 +23,9 @@ class Home{
   initWidgets(){
     const thisHome = this;
 
+    // eslint-disable-next-line no-undef
+    /*global Flickity*/
+    /*eslint no-undef: "error"*/
     thisHome.dom.carousel = new Flickity('.main-carousel', {
       autoPlay: 3000,
       prevNextButtons: false,
