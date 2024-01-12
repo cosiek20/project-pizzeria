@@ -1,3 +1,3 @@
-version 2.4# project-pizzeria
+See Live
 
-https://project-pizzeria-1.filipstasiak.repl.co/
+pizzeria-app.xce.pl
