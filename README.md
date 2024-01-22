@@ -1,3 +1,3 @@
 See Live
 
-pizzeria-app.xce.pl
+https://pizzeria.filipwebdev.pl/
